@@ -1,4 +1,4 @@
-# **Bolt-3D — AI-Native Physics Engine in Your Browser**
+# **PHYS.NEW: Bolt-3D — AI-Native Physics Engine in Your Browser**
 
 *"The Unity Killer, In Your Browser"*
 
