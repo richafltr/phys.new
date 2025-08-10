@@ -1,54 +1,160 @@
-[![Bolt.new: AI-Powered Full-Stack Web Development in the Browser](./public/social_preview_index.jpg)](https://bolt.new)
+# **Bolt-3D — AI-Native Physics Engine in Your Browser**
 
-# Bolt.new: AI-Powered Full-Stack Web Development in the Browser
+*"The Unity Killer, In Your Browser"*
 
-Bolt.new is an AI-powered web development agent that allows you to prompt, run, edit, and deploy full-stack applications directly from your browser—no local setup required. If you're here to build your own AI-powered web dev agent using the Bolt open source codebase, [click here to get started!](./CONTRIBUTING.md)
+---
 
-## What Makes Bolt.new Different
+## 🚀 Overview
 
-Claude, v0, etc are incredible- but you can't install packages, run backends or edit code. That’s where Bolt.new stands out:
+**Bolt-3D** is an **AI-powered, browser-native game engine** for building **high-quality 3D worlds** and **physics simulations** — instantly, from a prompt.
+It repurposes [Bolt.new](https://github.com/stackblitz/bolt.new) from website generation to **real-time Three.js world generation**, integrating:
 
-- **Full-Stack in the Browser**: Bolt.new integrates cutting-edge AI models with an in-browser development environment powered by **StackBlitz’s WebContainers**. This allows you to:
-  - Install and run npm tools and libraries (like Vite, Next.js, and more)
-  - Run Node.js servers
-  - Interact with third-party APIs
-  - Deploy to production from chat
-  - Share your work via a URL
+* **Needle Progressive GLTF** for streaming environments & characters from the cloud
+* **Dynamic Physics Engine Switching** — from lightweight (Cannon) to heavyweight (Rapier, Havok, PhysX WASM) for fidelity control
+* **VRoid / GLTF Avatar Support** with rigging, retargeting, ragdoll physics, and third-person controllers
+* **Action-based AI World Builder** that can spawn, edit, and reconfigure a scene in seconds
 
-- **AI with Environment Control**: Unlike traditional dev environments where the AI can only assist in code generation, Bolt.new gives AI models **complete control** over the entire  environment including the filesystem, node server, package manager, terminal, and browser console. This empowers AI agents to handle the entire app lifecycle—from creation to deployment.
+---
 
-Whether you’re an experienced developer, a PM or designer, Bolt.new allows you to build production-grade full-stack applications with ease.
+## 🛑 The Problem
 
-For developers interested in building their own AI-powered development tools with WebContainers, check out the open-source Bolt codebase in this repo!
+Unity and Unreal are heavy, bloated, and locked to native installs. Their physics layers are either outdated (Unity/PhysX) or require expert setup (Unreal).
+On the web, developers are stuck with **basic toy physics** or have to write thousands of lines of boilerplate just to stand up a scene.
+Sharing interactive worlds is slow and painful.
 
-## Tips and Tricks
+---
 
-Here are some tips to get the most out of Bolt.new:
+## 💡 The Solution
 
-- **Be specific about your stack**: If you want to use specific frameworks or libraries (like Astro, Tailwind, ShadCN, or any other popular JavaScript framework), mention them in your initial prompt to ensure Bolt scaffolds the project accordingly.
+A **Figma for physics and simulation**:
 
-- **Use the enhance prompt icon**: Before sending your prompt, try clicking the 'enhance' icon to have the AI model help you refine your prompt, then edit the results before submitting.
+* Runs entirely in-browser (WebContainers) — no native binaries, no install
+* Streams **optimized 3D assets** on demand from Needle Cloud
+* Dynamically swaps physics engines for **performance vs. fidelity** without changing code
+* Lets you create, modify, and share high-quality worlds **from natural language prompts**
 
-- **Scaffold the basics first, then add features**: Make sure the basic structure of your application is in place before diving into more advanced functionality. This helps Bolt understand the foundation of your project and ensure everything is wired up right before building out more advanced functionality.
+---
 
-- **Batch simple instructions**: Save time by combining simple instructions into one message. For example, you can ask Bolt to change the color scheme, add mobile responsiveness, and restart the dev server, all in one go saving you time and reducing API credit consumption significantly.
+## 🎥 Demo
 
-## FAQs
+> “Create a Fortnite-style island with a VRoid character in a white robe, ragdoll physics enabled, realistic lighting, and a stack of boxes I can knock over.”
 
-**Where do I sign up for a paid plan?**  
-Bolt.new is free to get started. If you need more AI tokens or want private projects, you can purchase a paid subscription in your [Bolt.new](https://bolt.new) settings, in the lower-left hand corner of the application. 
+In seconds, Bolt-3D:
 
-**What happens if I hit the free usage limit?**  
-Once your free daily token limit is reached, AI interactions are paused until the next day or until you upgrade your plan.
+1. Spawns the environment streamed from Needle
+2. Loads the chosen character from the catalog
+3. Configures physics engine + ragdoll setup
+4. Drops the props with full rigid-body interaction
+5. Gives you a playable TPS controller and sharable link
 
-**Is Bolt in beta?**  
-Yes, Bolt.new is in beta, and we are actively improving it based on feedback.
+---
 
-**How can I report Bolt.new issues?**  
-Check out the [Issues section](https://github.com/stackblitz/bolt.new/issues) to report an issue or request a new feature. Please use the search feature to check if someone else has already submitted the same issue/request.
+## ⚙️ Features
 
-**What frameworks/libraries currently work on Bolt?**  
-Bolt.new supports most popular JavaScript frameworks and libraries. If it runs on StackBlitz, it will run on Bolt.new as well.
+* **AI World Builder** — Action-based schema for dynamic scene generation (`worldPhysics`, `worldCreate`, `worldLoad`, `worldCharacter`, etc.)
+* **Dynamic Physics Switching** — `cannon-es` fallback, Rapier WASM stub, future Havok/PhysX support
+* **Cloud Asset Streaming** — Needle progressive GLTF for low-latency large scenes
+* **VRoid-Ready Characters** — Fully rigged, controller-ready, with ragdoll toggle
+* **Modular Engine Design** — Adapter pattern for physics, loaders, navigation
+* **Zero Install** — Built on WebContainers; runs in your browser
 
-**How can I add make sure my framework/project works well in bolt?**  
-We are excited to work with the JavaScript ecosystem to improve functionality in Bolt. Reach out to us via [hello@stackblitz.com](mailto:hello@stackblitz.com) to discuss how we can partner!
+---
+
+## 📂 Repo Structure
+
+```
+src/
+  agent/
+    bolt/                  # Action parser, executor, and runtime hook
+    catalog/characters.json# Character registry (id, description, tags, src)
+  engine/
+    render/                 # Three.js/R3F renderer, scene, loaders
+    physics/                # Engine API + adapters
+    character/              # Controllers, ragdoll builder, retargeting
+    navigation/              # Navmesh loader and agent movement
+  scenes/
+    demoScene.tsx           # Starter scene
+  ui/
+    debugPanel.tsx          # Physics toggle, collider debug, perf HUD
+```
+
+---
+
+## 🛠️ Getting Started
+
+### 1. Install
+
+```bash
+npm install
+```
+
+### 2. Run Dev Server
+
+```bash
+npm run dev
+```
+
+Your scene will open automatically in the browser.
+
+### 3. Try the Demo
+
+Use the built-in AI prompt to run:
+
+```
+Create a sunny island with a character from characters.json#nana, ragdoll disabled, 20 falling boxes, and a directional light.
+```
+
+---
+
+## 🧩 Action Schema
+
+Bolt-3D uses `<boltAction>` tags to describe world edits.
+
+Example:
+
+```xml
+<boltAction type="worldPhysics">
+  { "engine": "cannon", "gravity": [0,-9.81,0] }
+</boltAction>
+
+<boltAction type="worldCharacter">
+  {
+    "id": "hero",
+    "type": "player",
+    "src": "characters.json#nana",
+    "controller": "tps-basic",
+    "ragdoll": false
+  }
+</boltAction>
+```
+
+---
+
+## 🗺 Roadmap
+
+* [ ] Multiplayer state sync
+* [ ] Advanced navmesh crowd simulation
+* [ ] Physics material editor in debug panel
+* [ ] Expanded asset catalog with semantic search
+* [ ] VRM live avatar streaming + animation blending
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repo
+2. Create a feature branch
+3. Submit a PR with a detailed description
+
+---
+
+## 📜 License
+
+MIT © 2025 QEM Labs
+
+
+---
+
+## 🙏 Acknowledgments
+
+This project is built on top of the open-source [Bolt.new](https://github.com/stackblitz/bolt.new) framework, extending its AI-powered code generation capabilities to create immersive 3D worlds and physics simulations.
